@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>surat untuk ceyya 🌸</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffb6c1, #ffc0cb, #ffebef);
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Animasi Love Melayang */
+        .hearts-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: -50px;
+            background-color: rgba(255, 255, 255, 0.4);
+            width: 20px;
+            height: 20px;
+            transform: rotate(-45deg);
+            animation: float 5s infinite ease-in;
+        }
+
+        .heart::before, .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+        }
+
+        .heart::before { top: -10px; left: 0; }
+        .heart::after { top: 0; left: 10px; }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(-45deg) scale(0.8); opacity: 1; }
+            100% { transform: translateY(-1000px) rotate(-45deg) scale(1.2); opacity: 0; }
+        }
+
+        /* Amplop Container */
+        #envelope-container {
+            z-index: 10;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+            animation: bounce 2s infinite;
+        }
+
+        #envelope-container:hover {
+            transform: scale(1.05);
+        }
+
+        .envelope {
+            position: relative;
+            width: 280px;
+            height: 180px;
+            background: #ff758c;
+            border-radius: 5px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            margin: 0 auto;
+        }
+
+        .envelope::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            border-left: 140px solid transparent;
+            border-right: 140px solid transparent;
+            border-top: 90px solid #ff4b68;
+            z-index: 3;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .envelope::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            border-left: 140px solid #ff5e78;
+            border-right: 140px solid #ff5e78;
+            border-bottom: 90px solid #ff8fa3;
+            z-index: 2;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .envelope-paper {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            background: white;
+            z-index: 1;
+        }
+
+        .click-instruction {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #d81b60;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+            background: rgba(255, 255, 255, 0.7);
+            padding: 10px 20px;
+            border-radius: 30px;
+            display: inline-block;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-15px); }
+            60% { transform: translateY(-7px); }
+        }
+
+        /* Surat Dibuka Container */
+        #letter-container {
+            display: none;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.95);
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(255, 105, 180, 0.3);
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease-out;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        #letter-container.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .photo-container {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .photo-container img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            border: 4px solid #ffb6c1;
+        }
+
+        .letter-content {
+            color: #4a4a4a;
+            font-size: 1rem;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        .letter-content h1 {
+            font-family: 'Pacifico', cursive;
+            color: #d81b60;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .letter-content p {
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            color: #d81b60;
+            font-weight: 600;
+            text-align: center;
+            font-size: 1.2rem;
+            margin-top: 25px;
+        }
+
+        .signature {
+            text-align: right;
+            font-style: italic;
+            margin-top: 20px;
+            color: #ff6b81;
+            font-weight: 600;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #ffe4e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #ffb6c1; border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="hearts-bg" id="hearts-bg"></div>
+
+    <div id="envelope-container" onclick="openLetter()">
+        <div class="envelope">
+            <div class="envelope-paper"></div>
+        </div>
+        <div class="click-instruction">💌 Pencet Untuk Buka Surat 💌</div>
+    </div>
+
+    <div id="letter-container">
+        <div class="photo-container">
+            <img src="https://autoresbot.com/tmp_files/fd61368b-3558-4a31-bc7b-e94d0a91e27b.jpg" alt="Foto Ceyya">
+        </div>
+        
+        <div class="letter-content">
+            <h1>🌸 hai ceyya 🌸</h1>
+            
+            <p>aku mau jujur sesuatu...</p>
+            
+            <p>semakin lama kenal kamu, semakin banyak hal yang bikin aku nyaman. kamu itu orang yang baik, seru diajak ngobrol, dan selalu punya cara bikin suasana jadi lebih asik. 🩷</p>
+            
+            <p>aku juga suka karena ternyata kita punya banyak kesamaan. dari cara berpikir, hal-hal yang disukai, sampai obrolan random yang kadang nyambung tanpa perlu dijelasin panjang lebar. rasanya gampang banget kalau lagi cerita sama kamu. ✨</p>
+            
+            <p>dan satu hal yang aku kagumi dari kamu, yaitu hobi kamu yang suka muncak. ⛰️</p>
+            
+            <p>menurut aku itu keren. nggaa semua orang berani jalan jauh, naik ke tempat tinggi, menikmati perjalanan yang capek demi melihat pemandangan yang indah. dari situ aku lihat kalau kamu orang yang kuat, sabar, dan suka mencoba hal-hal baru.</p>
+            
+            <p>semakin kenal kamu, semakin aku sadar kalau kamu adalah seseorang yang spesial buat aku. 🌷</p>
+            
+            <p>mungkin surat ini sederhana, tapi semua yang aku tulis di sini bener bener dari hati.</p>
+            
+            <p class="highlight">💖 jadi...<br><br>aku suka kamu, ceyya.</p>
+            
+            <p style="text-align: center;">kamu berhasil bikin aku nyaman, bikin aku senang setiap kali ngobrol sama kamu, dan bikin aku pengen kenal kamu lebih jauh lagi.</p>
+            
+            <p class="highlight" style="font-size: 1.4rem;">✨ ceyya, mau nggak jadi pacar aku? 💕</p>
+            
+            <p class="signature">— dari zian orang yang menyukai kamu 🩷</p>
+        </div>
+    </div>
+
+    <script>
+        // Bikin animasi love melayang secara random di background
+        function createHearts() {
+            const heartsBg = document.getElementById('hearts-bg');
+            for (let i = 0; i < 25; i++) {
+                let heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heartsBg.appendChild(heart);
+            }
+        }
+
+        // Fungsi saat amplop diklik
+        function openLetter() {
+            const envelope = document.getElementById('envelope-container');
+            const letter = document.getElementById('letter-container');
+
+            // Sembunyikan amplop
+            envelope.style.display = 'none';
+            
+            // Tampilkan surat dengan animasi
+            letter.classList.add('show');
+            
+            // Auto scroll sedikit ke atas supaya rapi
+            window.scrollTo(0, 0);
+        }
+
+        // Jalankan fungsi buat background love saat halaman dimuat
+        window.onload = createHearts;
+    </script>
+
+</body>
+</html>
